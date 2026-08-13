@@ -415,7 +415,7 @@
   }
   .brand-cell:hover img { filter: grayscale(0%) brightness(1); }
 
-  /* ─── CAMPAIGN HIGHLIGHTS ─── */
+  /* ─── CAMPAIGN HIGHLIGHTS (VIDEO GRID) ─── */
   .highlights-section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
 
   .highlights-title {
@@ -428,33 +428,36 @@
   }
   .highlights-sub {
     text-align: center;
-    color: var(--dim);
-    font-size: 13px;
-    letter-spacing: 0.14em;
+    color: #A1A1AA;
+    font-size: 14px;
+    letter-spacing: 0.08em;
     margin-bottom: 56px;
   }
 
-  .gifs-grid {
+  .videos-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
-  .gif-cell {
-    border-radius: 12px;
+  .video-cell {
+    border-radius: 16px;
     overflow: hidden;
     position: relative;
     background: var(--surface);
     aspect-ratio: 9/16;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
-  .gif-cell img {
+  .video-cell video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     transition: transform 0.4s ease;
   }
-  .gif-cell:hover img { transform: scale(1.04); }
+  .video-cell:hover video { transform: scale(1.04); }
 
   /* ─── CTA ─── */
   .cta-section {
@@ -578,14 +581,14 @@
     .brands-section { padding: 56px 20px; }
     .brands-grid { grid-template-columns: repeat(3, 1fr); }
     .highlights-section { padding: 64px 20px; }
-    .gifs-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .videos-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .cta-section { padding: 80px 20px; }
     footer { padding: 32px 20px; flex-direction: column; gap: 20px; }
     .footer-links { flex-wrap: wrap; gap: 16px; }
   }
 
   @media (max-width: 480px) {
-    .gifs-grid { grid-template-columns: repeat(2, 1fr); }
+    .videos-grid { grid-template-columns: repeat(2, 1fr); }
     .brands-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
@@ -757,15 +760,37 @@
 <section class="highlights-section">
   <div class="highlights-title">CAMPAIGN HIGHLIGHTS</div>
   <div class="highlights-sub">«Real UGC & creator content driving engagement for our partners»</div>
-  <div class="gifs-grid">
-    <div class="gif-cell"><img src="assets/gifs/gif1.gif" alt="Campaign highlight" loading="lazy"></div>
-    <div class="gif-cell"><img src="assets/gifs/gif2.gif" alt="Campaign highlight" loading="lazy"></div>
-    <div class="gif-cell"><img src="assets/gifs/gif3.gif" alt="Campaign highlight" loading="lazy"></div>
-    <div class="gif-cell"><img src="assets/gifs/gif4.gif" alt="Campaign highlight" loading="lazy"></div>
-    <div class="gif-cell"><img src="assets/gifs/gif5.gif" alt="Campaign highlight" loading="lazy"></div>
-    <div class="gif-cell"><img src="assets/gifs/gif6.gif" alt="Campaign highlight" loading="lazy"></div>
-    <div class="gif-cell"><img src="assets/gifs/gif7.gif" alt="Campaign highlight" loading="lazy"></div>
-    <div class="gif-cell"><img src="assets/gifs/gif8.gif" alt="Campaign highlight" loading="lazy"></div>
+  <div class="videos-grid">
+    <div class="video-cell">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="assets/video/video1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-cell">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="assets/video/video2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-cell">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="assets/video/video3.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-cell">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="assets/video/video4.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-cell">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="assets/video/video5.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-cell">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="assets/video/video6.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </section>
 
