@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GCK Agency — Influencer Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:   #0A0A0A;
+    --surface: #111111;
+    --border:  #1E1E1E;
+    --muted:   #2A2A2A;
+    --dim:     #666666;
+    --silver:  #999999;
+    --white:   #F0EFED;
+    --accent:  #C8FF00;    /* electric lime — single bold note */
+    --accent2: #FF4D1C;    /* hot coral for secondary punch */
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo span {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    padding: 10px 22px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: #deff33; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,255,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,255,0,0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-headline {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(52px, 8vw, 110px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    max-width: 900px;
+    margin-bottom: 36px;
+  }
+
+  .hero-headline em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hero-descriptor {
+    font-size: 16px;
+    color: var(--silver);
+    max-width: 400px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    padding: 16px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: #deff33; transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--silver);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--white); border-color: var(--dim); }
+
+  /* ─── TICKER ─── */
+  .ticker-wrap {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    padding: 14px 0;
+    background: var(--surface);
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 60px;
+    width: max-content;
+    animation: ticker 28s linear infinite;
+  }
+
+  .ticker-track:hover { animation-play-state: paused; }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .ticker-item::after {
+    content: '✦';
+    color: var(--accent);
+    font-size: 8px;
+  }
+
+  /* ─── STATS ─── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-cell {
+    padding: 48px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+
+  .stat-number span { color: var(--accent); }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── SERVICES ─── */
+  .section {
+    padding: 96px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .service-card {
+    background: var(--black);
+    padding: 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+  }
+
+  .service-card:hover { background: var(--surface); }
+  .service-card:hover::before { height: 100%; }
+
+  .service-platform {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .platform-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .platform-icon.tiktok   { background: #010101; border: 1px solid #222; }
+  .platform-icon.instagram{ background: linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
+  .platform-icon.youtube  { background: #FF0000; }
+  .platform-icon.full     { background: var(--muted); }
+
+  .platform-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .service-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.15;
+    color: var(--white);
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--dim);
+    line-height: 1.75;
+    max-width: 380px;
+  }
+
+  .service-link {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .service-card:hover .service-link { opacity: 1; }
+
+  /* ─── VALUE PROP ─── */
+  .value-section {
+    padding: 96px 48px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .value-headline {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 4vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .value-headline em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .value-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,255,0,0.08);
+    border: 1px solid rgba(200,255,0,0.2);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .value-pill::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .value-points {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .value-point {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .value-point-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    padding-top: 3px;
+    flex-shrink: 0;
+    width: 24px;
+  }
+
+  .value-point-text strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .value-point-text p {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.7;
+  }
+
+  /* ─── BRANDS ─── */
+  .brands-section {
+    padding: 72px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brands-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+
+  .brands-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .brands-count {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .brand-cell {
+    background: var(--black);
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .brand-cell:hover { background: var(--surface); }
+
+  .brand-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+    text-align: center;
+    transition: color 0.2s;
+  }
+
+  .brand-cell:hover .brand-name { color: var(--white); }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    padding: 120px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(200,255,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .cta-headline {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+
+  .cta-sub {
+    font-size: 16px;
+    color: var(--dim);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-accent-lg {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    padding: 18px 40px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-accent-lg:hover { background: #deff33; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,255,0,0.2); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--silver);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    padding: 18px 32px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--dim); color: var(--white); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--dim);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 0 20px 56px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat-cell { padding: 28px 20px; border-right: 1px solid var(--border); }
+    .stat-cell:nth-child(2n) { border-right: none; }
+    .stat-number { font-size: 36px; }
+    .section { padding: 64px 20px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 36px 24px; }
+    .value-section { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px; }
+    .brands-section { padding: 56px 20px; }
+    .brands-grid { grid-template-columns: repeat(3, 1fr); }
+    .cta-section { padding: 80px 20px; }
+    footer { padding: 32px 20px; flex-direction: column; gap: 20px; }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span></span>
+    GCK AGENCY
+  </div>
+  <a href="#contact" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-eyebrow">Influencer Marketing Group</div>
+  <h1 class="hero-headline">
+    We find<br>
+    influencers<br>
+    <em>that convert.</em>
+  </h1>
+  <div class="hero-sub-row">
+    <p class="hero-descriptor">
+      We handle everything — discovery, outreach, negotiation, and reporting. 
+      You pay only for the creator integration. Zero agency fees.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start for Free →</a>
+      <a href="#services" class="btn-ghost">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item">TikTok Discovery</div>
+    <div class="ticker-item">Instagram Creators</div>
+    <div class="ticker-item">YouTube Campaigns</div>
+    <div class="ticker-item">UGC Production</div>
+    <div class="ticker-item">Full Management</div>
+    <div class="ticker-item">Zero Agency Fees</div>
+    <div class="ticker-item">500+ Influencers</div>
+    <div class="ticker-item">10M+ Campaign Views</div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item">TikTok Discovery</div>
+    <div class="ticker-item">Instagram Creators</div>
+    <div class="ticker-item">YouTube Campaigns</div>
+    <div class="ticker-item">UGC Production</div>
+    <div class="ticker-item">Full Management</div>
+    <div class="ticker-item">Zero Agency Fees</div>
+    <div class="ticker-item">500+ Influencers</div>
+    <div class="ticker-item">10M+ Campaign Views</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-cell">
+    <div class="stat-number">10<span>M+</span></div>
+    <div class="stat-label">Campaign Views</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-number">50<span>+</span></div>
+    <div class="stat-label">Brand Partnerships</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-number">500<span>+</span></div>
+    <div class="stat-label">Influencers Available</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-number">24<span>/7</span></div>
+    <div class="stat-label">Campaign Support</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-eyebrow">What We Do</div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-platform">
+        <div class="platform-icon tiktok">🎵</div>
+        <div class="platform-name">TikTok</div>
+      </div>
+      <div class="service-title">TikTok Influencer Discovery</div>
+      <p class="service-desc">We identify and connect your brand with carefully selected TikTok creators whose audience aligns with your campaign goals and product category.</p>
+      <a href="#contact" class="service-link">Start a campaign →</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-platform">
+        <div class="platform-icon instagram">📸</div>
+        <div class="platform-name">Instagram</div>
+      </div>
+      <div class="service-title">Instagram Creator Matching</div>
+      <p class="service-desc">We connect brands with high-performing Instagram creators to increase engagement, reach, and brand awareness through authentic storytelling.</p>
+      <a href="#contact" class="service-link">Start a campaign →</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-platform">
+        <div class="platform-icon youtube">▶</div>
+        <div class="platform-name">YouTube</div>
+      </div>
+      <div class="service-title">Content & UGC Production</div>
+      <p class="service-desc">We source and produce authentic, high-converting user-generated content designed to build trust with your audience and drive measurable sales.</p>
+      <a href="#contact" class="service-link">Start a campaign →</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-platform">
+        <div class="platform-icon full">⚙</div>
+        <div class="platform-name">Full Service</div>
+      </div>
+      <div class="service-title">Full Campaign Management</div>
+      <p class="service-desc">From influencer selection to campaign reporting, we manage the entire process — outreach, contracts, content approval, and performance analytics.</p>
+      <a href="#contact" class="service-link">Start a campaign →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- VALUE PROP -->
+<section class="value-section">
+  <div>
+    <div class="value-pill">Why GCK</div>
+    <h2 class="value-headline">
+      We work for<br>
+      <em>results,</em><br>
+      not retainers.
+    </h2>
+  </div>
+  <div class="value-points">
+    <div class="value-point">
+      <div class="value-point-num">01</div>
+      <div class="value-point-text">
+        <strong>Zero Agency Fees</strong>
+        <p>We don't charge brands for outreach or management. Your budget goes directly toward creator integrations — nothing else.</p>
+      </div>
+    </div>
+    <div class="value-point">
+      <div class="value-point-num">02</div>
+      <div class="value-point-text">
+        <strong>Pre-Vetted Creator Network</strong>
+        <p>500+ influencers across TikTok, Instagram, and YouTube — already screened for engagement quality and audience authenticity.</p>
+      </div>
+    </div>
+    <div class="value-point">
+      <div class="value-point-num">03</div>
+      <div class="value-point-text">
+        <strong>End-to-End Execution</strong>
+        <p>We handle discovery, outreach, negotiation, briefing, and post-campaign reporting. You approve the content. We handle everything else.</p>
+      </div>
+    </div>
+    <div class="value-point">
+      <div class="value-point-num">04</div>
+      <div class="value-point-text">
+        <strong>24/7 Support</strong>
+        <p>Live campaigns don't sleep. Neither do we. Your dedicated manager is available around the clock during active campaigns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands-section">
+  <div class="brands-header">
+    <div class="brands-title">Brands We've Amplified</div>
+    <div class="brands-count">50+ Partners</div>
+  </div>
+  <div class="brands-grid">
+    <div class="brand-cell"><div class="brand-name">TopTop</div></div>
+    <div class="brand-cell"><div class="brand-name">Liene</div></div>
+    <div class="brand-cell"><div class="brand-name">OPPO</div></div>
+    <div class="brand-cell"><div class="brand-name">Soyo</div></div>
+    <div class="brand-cell"><div class="brand-name">GAC</div></div>
+    <div class="brand-cell"><div class="brand-name">TECNO</div></div>
+    <div class="brand-cell"><div class="brand-name">Miniso</div></div>
+    <div class="brand-cell"><div class="brand-name">L'Occitane</div></div>
+    <div class="brand-cell"><div class="brand-name">Eufy</div></div>
+    <div class="brand-cell"><div class="brand-name">+ More</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div>
+  <div class="cta-eyebrow">Get Started Today</div>
+  <h2 class="cta-headline">
+    Ready to find<br>
+    your creators?
+  </h2>
+  <p class="cta-sub">
+    Tell us about your brand and campaign goals. We'll match you with the right creators within 48 hours.
+  </p>
+  <div class="cta-buttons">
+    <a href="mailto:hello@gckagency.com" class="btn-accent-lg">✉ Email Us</a>
+    <a href="https://wa.me/" target="_blank" class="btn-outline">💬 WhatsApp</a>
+    <a href="https://instagram.com/" target="_blank" class="btn-outline">📱 Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">GCK AGENCY</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+    <a href="https://wa.me/" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2026 GCK Agency. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
