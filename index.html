@@ -47,7 +47,6 @@
     backdrop-filter: blur(16px);
   }
 
-  /* Увеличили логотип в шапке */
   .nav-logo img {
     height: 68px;
     width: auto;
@@ -93,7 +92,6 @@
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
   }
 
-  /* Сделали центральный логотип более видимым (opacity: 0.18) */
   .hero-logo-center {
     position: absolute;
     top: 50%;
@@ -443,7 +441,7 @@
     max-height: 32px;
   }
 
-  /* ─── CAMPAIGN HIGHLIGHTS (VIDEO GRID) ─── */
+  /* ─── CAMPAIGN HIGHLIGHTS ─── */
   .highlights-section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
 
   .highlights-title {
@@ -648,7 +646,8 @@
   <a href="#" class="nav-logo">
     <img src="assets/images/logo.png" alt="GCK Agency">
   </a>
-  <a href="https://api.whatsapp.com/send?phone=995599281709" target="_blank" class="nav-cta">Start for Free →</a>
+  <!-- Кнопка ведет к блоку контактов внизу -->
+  <a href="#contact" class="nav-cta">Start for Free →</a>
 </nav>
 
 <!-- HERO -->
@@ -667,7 +666,8 @@
       You pay only for the creator integration. Zero agency fees.
     </p>
     <div class="hero-actions">
-      <a href="https://api.whatsapp.com/send?phone=995599281709" target="_blank" class="btn-primary">Start for Free →</a>
+      <!-- Кнопка в Hero теперь также скроллит к контактам -->
+      <a href="#contact" class="btn-primary">Start for Free →</a>
       <a href="#services" class="btn-ghost">See how it works</a>
     </div>
   </div>
@@ -870,7 +870,8 @@
   <h2 class="cta-headline">Ready to find<br>your creators?</h2>
   <p class="cta-sub">Tell us about your brand and campaign goals. We'll match you with the most relevant creators for your budget and niche.</p>
   <div class="cta-buttons">
-    <a href="mailto:team@gcgroupagency.com" class="btn-accent-lg">
+    <!-- Прямая ссылка на Gmail окно отправки с вашей новой почтой -->
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=khatia.brand.marketing.manager@gmail.com" target="_blank" class="btn-accent-lg">
       <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       Email Us
     </a>
@@ -897,7 +898,7 @@
   <div class="footer-copy">© 2026 GCK Agency. All rights reserved.</div>
 </footer>
 
-<!-- ФИКС СБРОСА СКРОЛЛА ПРИ ПЕРЕЗАГРУЗКЕ -->
+<!-- Скрипт сброса скролла при обновлении страницы -->
 <script>
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
