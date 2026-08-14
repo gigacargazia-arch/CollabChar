@@ -14,9 +14,9 @@
     --black:   #0A0A0A;
     --surface: #111111;
     --border:  #1E1E1E;
-    --muted:   #444444;
-    --dim:     #9E9E9E; /* Повышен контраст текста с #666666 */
-    --silver:  #C5C5C5; /* Повышен контраст текста с #999999 */
+    --muted:   #2A2A2A;
+    --dim:     #666666;
+    --silver:  #999999;
     --white:   #F0EFED;
     --accent:  #C8FF00;
   }
@@ -126,12 +126,11 @@
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: clamp(48px, 7.5vw, 108px);
-    line-height: 0.98; /* Скоректировано для предотвращения обрезания букв */
+    line-height: 0.92;
     letter-spacing: -0.03em;
     color: var(--white);
     max-width: 900px;
     margin-bottom: 36px;
-    padding-bottom: 8px; /* Запас высоты для нижней части букв */
     position: relative;
   }
   .hero-headline em { font-style: normal; color: var(--accent); }
@@ -235,7 +234,7 @@
     margin-bottom: 8px;
   }
   .stat-number span { color: var(--accent); }
-  .stat-label { font-size: 12px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+  .stat-label { font-size: 12px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
 
   /* ─── SERVICES ─── */
   .section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
@@ -321,9 +320,8 @@
     font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 26px;
-    line-height: 1.2;
+    line-height: 1.15;
     color: var(--white);
-    padding-bottom: 2px;
   }
   .service-desc { font-size: 14px; color: var(--dim); line-height: 1.75; max-width: 380px; }
 
@@ -340,9 +338,8 @@
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: clamp(36px, 4vw, 58px);
-    line-height: 1.1;
+    line-height: 1.05;
     letter-spacing: -0.03em;
-    padding-bottom: 4px;
   }
   .value-headline em { font-style: normal; color: var(--accent); }
 
@@ -392,7 +389,6 @@
     font-size: 15px;
     color: var(--white);
     margin-bottom: 4px;
-    padding-bottom: 2px;
   }
   .value-point-text p { font-size: 13px; color: var(--dim); line-height: 1.7; }
 
@@ -455,11 +451,10 @@
     letter-spacing: 0.1em;
     text-align: center;
     margin-bottom: 12px;
-    padding-bottom: 4px;
   }
   .highlights-sub {
     text-align: center;
-    color: var(--silver);
+    color: #A1A1AA;
     font-size: 14px;
     letter-spacing: 0.08em;
     margin-bottom: 56px;
@@ -518,10 +513,9 @@
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: clamp(40px, 6vw, 80px);
-    line-height: 1.02; /* Запас для обрезания хвостов букв */
+    line-height: 0.95;
     letter-spacing: -0.03em;
     margin-bottom: 20px;
-    padding-bottom: 6px;
     position: relative;
   }
   .cta-sub {
@@ -602,7 +596,7 @@
     transition: color 0.2s;
   }
   .footer-links a:hover { color: var(--white); }
-  .footer-copy { font-size: 12px; color: var(--dim); letter-spacing: 0.04em; }
+  .footer-copy { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
 
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
@@ -652,7 +646,8 @@
   <a href="#" class="nav-logo">
     <img src="assets/images/logo.png" alt="GCK Agency">
   </a>
-  <a href="#contact" class="nav-cta">Start for Free &rarr;</a>
+  <!-- Кнопка ведет к блоку контактов внизу -->
+  <a href="#contact" class="nav-cta">Start for Free →</a>
 </nav>
 
 <!-- HERO -->
@@ -671,7 +666,8 @@
       You pay only for the creator integration. Zero agency fees.
     </p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Start for Free &rarr;</a>
+      <!-- Кнопка в Hero теперь также скроллит к контактам -->
+      <a href="#contact" class="btn-primary">Start for Free →</a>
       <a href="#services" class="btn-ghost">See how it works</a>
     </div>
   </div>
@@ -874,6 +870,7 @@
   <h2 class="cta-headline">Ready to find<br>your creators?</h2>
   <p class="cta-sub">Tell us about your brand and campaign goals. We'll match you with the most relevant creators for your budget and niche.</p>
   <div class="cta-buttons">
+    <!-- Прямая ссылка на Gmail окно отправки с вашей новой почтой -->
     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=khatia.brand.marketing.manager@gmail.com" target="_blank" class="btn-accent-lg">
       <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       Email Us
@@ -901,6 +898,7 @@
   <div class="footer-copy">© 2026 GCK Agency. All rights reserved.</div>
 </footer>
 
+<!-- Скрипт сброса скролла при обновлении страницы -->
 <script>
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
