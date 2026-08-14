@@ -41,17 +41,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 48px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    background: rgba(10,10,10,0.9);
+    padding: 10px 48px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(10,10,10,0.92);
     backdrop-filter: blur(16px);
   }
 
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
   .nav-logo img {
-    height: 68px;
+    height: 84px;
     width: auto;
     display: block;
     object-fit: contain;
+    margin-top: 4px;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-logo img:hover {
+    transform: scale(1.02);
   }
 
   .nav-cta {
@@ -76,7 +88,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 48px 60px;
+    padding: 140px 48px 60px;
     position: relative;
     overflow: hidden;
   }
@@ -641,13 +653,13 @@
       grid-template-columns: 1fr;
       gap: 48px;
     }
-    .hero { padding: 110px 24px 60px; }
+    .hero { padding: 130px 24px 60px; }
     .hero-stats-grid { width: 100%; }
   }
 
   @media (max-width: 768px) {
-    nav { padding: 12px 20px; }
-    .nav-logo img { height: 48px; }
+    nav { padding: 8px 20px 4px; }
+    .nav-logo img { height: 56px; margin-top: 2px; }
     .section { padding: 64px 20px; }
     .services-grid { grid-template-columns: 1fr; }
     .service-card { padding: 36px 24px; }
