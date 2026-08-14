@@ -71,13 +71,12 @@
   }
   .nav-cta:hover { background: #deff33; }
 
-  /* ─── HERO ─── */
+  /* ─── HERO (REDESIGNED) ─── */
   .hero {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 48px 72px;
+    align-items: center;
+    padding: 120px 48px 60px;
     position: relative;
     overflow: hidden;
   }
@@ -92,15 +91,34 @@
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
   }
 
-  .hero-logo-center {
+  .hero-glow {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
-    opacity: 0.18;
-    width: 520px;
-    max-width: 75vw;
+    right: 15%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(200,255,0,0.08) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero-eyebrow {
@@ -109,11 +127,10 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
     gap: 12px;
-    position: relative;
   }
   .hero-eyebrow::before {
     content: '';
@@ -125,33 +142,28 @@
   .hero-headline {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(48px, 7.5vw, 108px);
-    line-height: 0.92;
+    font-size: clamp(44px, 5.5vw, 84px);
+    line-height: 0.95;
     letter-spacing: -0.03em;
     color: var(--white);
-    max-width: 900px;
-    margin-bottom: 36px;
-    position: relative;
+    margin-bottom: 28px;
   }
   .hero-headline em { font-style: normal; color: var(--accent); }
 
-  .hero-sub-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-    position: relative;
-  }
-
   .hero-descriptor {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--silver);
-    max-width: 400px;
+    max-width: 480px;
     line-height: 1.7;
+    margin-bottom: 36px;
   }
 
-  .hero-actions { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+  .hero-actions { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+  }
 
   .btn-primary {
     display: inline-flex;
@@ -168,7 +180,7 @@
     text-decoration: none;
     transition: all 0.2s;
   }
-  .btn-primary:hover { background: #deff33; transform: translateY(-1px); }
+  .btn-primary:hover { background: #deff33; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(200,255,0,0.15); }
 
   .btn-ghost {
     color: var(--silver);
@@ -178,7 +190,52 @@
     padding-bottom: 2px;
     transition: color 0.2s;
   }
-  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+  /* Hero Stats Grid (Right Column) */
+  .hero-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+
+  .hero-stat-card {
+    background: rgba(17, 17, 17, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 32px 24px;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-stat-card:hover {
+    border-color: rgba(200, 255, 0, 0.4);
+    transform: translateY(-3px);
+    background: rgba(200, 255, 0, 0.02);
+  }
+
+  .hero-stat-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .hero-stat-number span { color: var(--accent); }
+
+  .hero-stat-label {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 
   /* ─── TICKER ─── */
   .ticker-wrap {
@@ -187,6 +244,8 @@
     overflow: hidden;
     padding: 14px 0;
     background: var(--surface);
+    position: relative;
+    z-index: 2;
   }
   .ticker-track {
     display: flex;
@@ -212,29 +271,6 @@
     gap: 60px;
   }
   .ticker-item::after { content: '✦'; color: var(--accent); font-size: 8px; }
-
-  /* ─── STATS ─── */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-bottom: 1px solid var(--border);
-  }
-  .stat-cell {
-    padding: 48px;
-    border-right: 1px solid var(--border);
-  }
-  .stat-cell:last-child { border-right: none; }
-  .stat-number {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 48px;
-    line-height: 1;
-    color: var(--white);
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
-  }
-  .stat-number span { color: var(--accent); }
-  .stat-label { font-size: 12px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
 
   /* ─── SERVICES ─── */
   .section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
@@ -598,16 +634,19 @@
   .footer-links a:hover { color: var(--white); }
   .footer-copy { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
 
-  /* ─── MOBILE ─── */
+  /* ─── MOBILE & RESPONSIVE ─── */
+  @media (max-width: 992px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .hero { padding: 110px 24px 60px; }
+    .hero-stats-grid { width: 100%; }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 12px 20px; }
     .nav-logo img { height: 48px; }
-    .hero { padding: 0 20px 56px; }
-    .hero-logo-center { width: 340px; opacity: 0.15; }
-    .stats-bar { grid-template-columns: 1fr 1fr; }
-    .stat-cell { padding: 28px 20px; }
-    .stat-cell:nth-child(2n) { border-right: none; }
-    .stat-number { font-size: 34px; }
     .section { padding: 64px 20px; }
     .services-grid { grid-template-columns: 1fr; }
     .service-card { padding: 36px 24px; }
@@ -615,16 +654,9 @@
     .brands-section { padding: 56px 20px; }
     .brands-grid { grid-template-columns: repeat(3, 1fr); }
     
-    .brand-cell {
-      height: 90px;
-      padding: 16px 12px;
-    }
-    .brand-cell img {
-      max-height: 48px;
-    }
-    .brand-cell img.brand-tecno {
-      max-height: 24px;
-    }
+    .brand-cell { height: 90px; padding: 16px 12px; }
+    .brand-cell img { max-height: 48px; }
+    .brand-cell img.brand-tecno { max-height: 24px; }
 
     .highlights-section { padding: 64px 20px; }
     .videos-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -634,6 +666,9 @@
   }
 
   @media (max-width: 480px) {
+    .hero-stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hero-stat-card { padding: 20px 16px; }
+    .hero-stat-number { font-size: 32px; }
     .videos-grid { grid-template-columns: repeat(2, 1fr); }
     .brands-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -646,29 +681,51 @@
   <a href="#" class="nav-logo">
     <img src="assets/images/logo.png" alt="GCK Agency">
   </a>
-  <!-- Кнопка ведет к блоку контактов внизу -->
   <a href="#contact" class="nav-cta">Start for Free →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid-bg"></div>
-  <img src="assets/images/logo.png" alt="" class="hero-logo-center">
-  <div class="hero-eyebrow">Influencer Marketing Group</div>
-  <h1 class="hero-headline">
-    We find<br>
-    influencers<br>
-    <em>that convert.</em>
-  </h1>
-  <div class="hero-sub-row">
-    <p class="hero-descriptor">
-      We handle everything — discovery, outreach, negotiation, and reporting.
-      You pay only for the creator integration. Zero agency fees.
-    </p>
-    <div class="hero-actions">
-      <!-- Кнопка в Hero теперь также скроллит к контактам -->
-      <a href="#contact" class="btn-primary">Start for Free →</a>
-      <a href="#services" class="btn-ghost">See how it works</a>
+  <div class="hero-glow"></div>
+  
+  <div class="hero-container">
+    <!-- Левая колонка с оффером и кнопками -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">Influencer Marketing Group</div>
+      <h1 class="hero-headline">
+        We find<br>
+        influencers<br>
+        <em>that convert.</em>
+      </h1>
+      <p class="hero-descriptor">
+        We handle everything — discovery, outreach, negotiation, and reporting.
+        You pay only for the creator integration. Zero agency fees.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start for Free →</a>
+        <a href="#services" class="btn-ghost">See how it works</a>
+      </div>
+    </div>
+
+    <!-- Правая колонка с карточками статистики -->
+    <div class="hero-stats-grid">
+      <div class="hero-stat-card">
+        <div class="hero-stat-number">10<span>M+</span></div>
+        <div class="hero-stat-label">Campaign Views</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-number">50<span>+</span></div>
+        <div class="hero-stat-label">Brand Partners</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-number">500<span>+</span></div>
+        <div class="hero-stat-label">Influencers</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-number">24<span>/7</span></div>
+        <div class="hero-stat-label">Support</div>
+      </div>
     </div>
   </div>
 </section>
@@ -692,26 +749,6 @@
     <div class="ticker-item">Zero Agency Fees</div>
     <div class="ticker-item">500+ Influencers</div>
     <div class="ticker-item">10M+ Campaign Views</div>
-  </div>
-</div>
-
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat-cell">
-    <div class="stat-number">10<span>M+</span></div>
-    <div class="stat-label">Campaign Views</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-number">50<span>+</span></div>
-    <div class="stat-label">Brand Partnerships</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-number">500<span>+</span></div>
-    <div class="stat-label">Influencers Available</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-number">24<span>/7</span></div>
-    <div class="stat-label">Campaign Support</div>
   </div>
 </div>
 
@@ -870,7 +907,6 @@
   <h2 class="cta-headline">Ready to find<br>your creators?</h2>
   <p class="cta-sub">Tell us about your brand and campaign goals. We'll match you with the most relevant creators for your budget and niche.</p>
   <div class="cta-buttons">
-    <!-- Прямая ссылка на Gmail окно отправки с вашей новой почтой -->
     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=khatia.brand.marketing.manager@gmail.com" target="_blank" class="btn-accent-lg">
       <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       Email Us
@@ -898,7 +934,6 @@
   <div class="footer-copy">© 2026 GCK Agency. All rights reserved.</div>
 </footer>
 
-<!-- Скрипт сброса скролла при обновлении страницы -->
 <script>
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
