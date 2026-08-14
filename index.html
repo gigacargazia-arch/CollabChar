@@ -41,16 +41,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 48px;
+    padding: 12px 48px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
     background: rgba(10,10,10,0.9);
     backdrop-filter: blur(16px);
   }
 
+  /* Увеличили логотип в шапке */
   .nav-logo img {
-    height: 48px;
+    height: 68px;
     width: auto;
     display: block;
+    object-fit: contain;
   }
 
   .nav-cta {
@@ -91,14 +93,15 @@
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
   }
 
+  /* Сделали центральный логотип более видимым (opacity: 0.18) */
   .hero-logo-center {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -60%);
-    opacity: 0.06;
-    width: 480px;
-    max-width: 70vw;
+    transform: translate(-50%, -55%);
+    opacity: 0.18;
+    width: 520px;
+    max-width: 75vw;
     pointer-events: none;
   }
 
@@ -436,7 +439,6 @@
   }
   .brand-cell:hover img { filter: brightness(1.2); transform: scale(1.05); }
 
-  /* Уменьшаем только TECNO, чтобы он гармонично смотрелся на фоне остальных */
   .brand-cell img.brand-tecno {
     max-height: 32px;
   }
@@ -586,7 +588,7 @@
     gap: 24px;
     flex-wrap: wrap;
   }
-  .footer-logo img { height: 36px; width: auto; opacity: 0.5; }
+  .footer-logo img { height: 48px; width: auto; opacity: 0.7; }
   .footer-links { display: flex; gap: 28px; }
   .footer-links a {
     font-size: 12px;
@@ -600,9 +602,10 @@
 
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
-    nav { padding: 14px 20px; }
-    .nav-logo img { height: 38px; }
+    nav { padding: 12px 20px; }
+    .nav-logo img { height: 48px; }
     .hero { padding: 0 20px 56px; }
+    .hero-logo-center { width: 340px; opacity: 0.15; }
     .stats-bar { grid-template-columns: 1fr 1fr; }
     .stat-cell { padding: 28px 20px; }
     .stat-cell:nth-child(2n) { border-right: none; }
