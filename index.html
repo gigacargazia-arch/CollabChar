@@ -33,6 +33,11 @@
     overflow-x: hidden;
   }
 
+  /* ─── SCROLL MARGIN FOR FIXED NAV OFFSET ─── */
+  section, div[id] {
+    scroll-margin-top: 100px;
+  }
+
   /* ─── NAV ─── */
   nav {
     position: fixed;
@@ -66,25 +71,23 @@
     transform: scale(1.02);
   }
 
-  /* Central Nav Links */
-  .nav-links {
+  .nav-menu {
     display: flex;
     align-items: center;
     gap: 32px;
   }
 
-  .nav-links a {
-    color: #FFFFFF;
-    text-decoration: none;
+  .nav-menu a {
+    color: var(--silver);
     font-family: 'Syne', sans-serif;
     font-weight: 600;
     font-size: 13px;
-    letter-spacing: 0.06em;
-    transition: color 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .nav-links a:hover {
-    color: var(--accent);
+  .nav-menu a:hover {
+    color: var(--white);
   }
 
   .nav-cta {
@@ -225,7 +228,6 @@
   }
   .btn-ghost:hover { color: var(--white); border-color: var(--white); }
 
-  /* Hero Stats Grid (Right Column) */
   .hero-stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -394,7 +396,7 @@
   }
   .service-desc { font-size: 14px; color: var(--dim); line-height: 1.75; max-width: 380px; }
 
-  /* ─── VALUE ─── */
+  /* ─── VALUE / WHY US ─── */
   .value-section {
     padding: 96px 48px;
     border-bottom: 1px solid var(--border);
@@ -518,9 +520,12 @@
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: clamp(28px, 3.5vw, 48px);
-    letter-spacing: 0.1em;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
     text-align: center;
     margin-bottom: 12px;
+    padding: 4px 0;
+    overflow: visible;
   }
   .highlights-sub {
     text-align: center;
@@ -676,14 +681,12 @@
     }
     .hero { padding: 130px 24px 60px; }
     .hero-stats-grid { width: 100%; }
-    .nav-links { gap: 18px; }
-    .nav-links a { font-size: 12px; }
   }
 
   @media (max-width: 768px) {
     nav { padding: 8px 20px 4px; }
     .nav-logo img { height: 56px; margin-top: 2px; }
-    .nav-links { display: none; } /* Скрываем текстовое меню на мобильных экранах */
+    .nav-menu { display: none; }
     .section { padding: 64px 20px; }
     .services-grid { grid-template-columns: 1fr; }
     .service-card { padding: 36px 24px; }
@@ -718,7 +721,7 @@
   <a href="#" class="nav-logo">
     <img src="assets/images/logo.svg" alt="GCK Agency">
   </a>
-  <div class="nav-links">
+  <div class="nav-menu">
     <a href="#services">Services</a>
     <a href="#why-us">Why Us</a>
     <a href="#brands">Brands</a>
@@ -733,7 +736,7 @@
   <div class="hero-glow"></div>
   
   <div class="hero-container">
-    <!-- Левая колонка с оффером и кнопками -->
+    <!-- Левая колонка -->
     <div class="hero-left">
       <div class="hero-eyebrow">Influencer Marketing Group</div>
       <h1 class="hero-headline">
@@ -751,7 +754,7 @@
       </div>
     </div>
 
-    <!-- Правая колонка с карточками статистики -->
+    <!-- Правая колонка -->
     <div class="hero-stats-grid">
       <div class="hero-stat-card">
         <div class="hero-stat-number">10<span>M+</span></div>
@@ -843,7 +846,7 @@
   </div>
 </section>
 
-<!-- VALUE PROP -->
+<!-- VALUE PROP / WHY US -->
 <section class="value-section" id="why-us">
   <div>
     <div class="value-pill">Why GCK</div>
@@ -970,9 +973,10 @@
   <div class="footer-logo"><img src="assets/images/logo.svg" alt="GCK Agency"></div>
   <div class="footer-links">
     <a href="#services">Services</a>
+    <a href="#why-us">Why Us</a>
+    <a href="#brands">Brands</a>
+    <a href="#highlights">Campaign Highlights</a>
     <a href="#contact">Contact</a>
-    <a href="https://www.instagram.com/khatia.chargazia/" target="_blank">Instagram</a>
-    <a href="https://api.whatsapp.com/send?phone=995599281709" target="_blank">WhatsApp</a>
   </div>
   <div class="footer-copy">© 2026 GCK Agency. All rights reserved.</div>
 </footer>
@@ -981,14 +985,6 @@
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
-  window.addEventListener('beforeunload', function() {
-    window.scrollTo(0, 0);
-  });
-  document.addEventListener('DOMContentLoaded', function() {
-    if (!window.location.hash) {
-      window.scrollTo(0, 0);
-    }
-  });
 </script>
 
 </body>
