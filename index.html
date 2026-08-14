@@ -6,7 +6,8 @@
 <title>GCK Agency — Influencer Marketing Group</title>
 <meta name="description" content="GCK Agency connects ambitious brands with top-tier influencers to drive authentic engagement, reach, and real sales growth.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -46,7 +47,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 48px 6px;
+    padding: 12px 48px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     background: rgba(10,10,10,0.92);
     backdrop-filter: blur(16px);
@@ -59,11 +60,10 @@
   }
 
   .nav-logo img {
-    height: 84px;
+    height: 52px;
     width: auto;
     display: block;
     object-fit: contain;
-    margin-top: 4px;
     transition: transform 0.2s ease;
   }
 
@@ -79,9 +79,9 @@
 
   .nav-menu a {
     color: var(--silver);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
     transition: color 0.2s;
   }
@@ -96,23 +96,23 @@
     gap: 8px;
     background: var(--accent);
     color: var(--black);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 13px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     padding: 10px 22px;
-    border-radius: 2px;
+    border-radius: 4px;
     text-decoration: none;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
   }
-  .nav-cta:hover { background: #deff33; }
+  .nav-cta:hover { background: #deff33; transform: translateY(-1px); }
 
   /* ─── HERO ─── */
   .hero {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
-    padding: 140px 48px 60px;
+    padding: 120px 48px 80px;
     position: relative;
     overflow: hidden;
   }
@@ -145,7 +145,7 @@
     gap: 60px;
     align-items: center;
     width: 100%;
-    max-width: 1300px;
+    max-width: 1280px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -158,12 +158,12 @@
   }
 
   .hero-eyebrow {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -171,27 +171,26 @@
   .hero-eyebrow::before {
     content: '';
     display: block;
-    width: 32px; height: 1px;
+    width: 28px; height: 1px;
     background: var(--accent);
   }
 
   .hero-headline {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(44px, 5.5vw, 84px);
-    line-height: 1.1; /* Исправлено: увеличен интервал для буквы g */
-    letter-spacing: -0.03em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(40px, 4.5vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
     color: var(--white);
-    margin-bottom: 28px;
-    padding-bottom: 6px;
+    margin-bottom: 24px;
   }
   .hero-headline em { font-style: normal; color: var(--accent); }
 
   .hero-descriptor {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--silver);
     max-width: 480px;
-    line-height: 1.7;
+    line-height: 1.6;
     margin-bottom: 36px;
   }
 
@@ -208,12 +207,12 @@
     gap: 10px;
     background: var(--accent);
     color: var(--black);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 14px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
     padding: 16px 32px;
-    border-radius: 2px;
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.2s;
   }
@@ -221,7 +220,7 @@
 
   .btn-ghost {
     color: var(--silver);
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
     border-bottom: 1px solid var(--border);
     padding-bottom: 2px;
@@ -239,8 +238,8 @@
   .hero-stat-card {
     background: rgba(17, 17, 17, 0.7);
     border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 32px 24px;
+    border-radius: 8px;
+    padding: 28px 24px;
     backdrop-filter: blur(12px);
     transition: all 0.3s ease;
     display: flex;
@@ -255,12 +254,12 @@
   }
 
   .hero-stat-number {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 42px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
     line-height: 1;
     color: var(--white);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     margin-bottom: 8px;
   }
   .hero-stat-number span { color: var(--accent); }
@@ -295,10 +294,10 @@
     to   { transform: translateX(-50%); }
   }
   .ticker-item {
-    font-family: 'Syne', sans-serif;
-    font-size: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--dim);
     white-space: nowrap;
@@ -306,18 +305,18 @@
     align-items: center;
     gap: 60px;
   }
-  .ticker-item::after { content: '✦'; color: var(--accent); font-size: 8px; }
+  .ticker-item::after { content: '✦'; color: var(--accent); font-size: 9px; }
 
   /* ─── SERVICES ─── */
   .section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
 
   .section-eyebrow {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 48px;
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -333,10 +332,10 @@
 
   .service-card {
     background: var(--black);
-    padding: 52px;
+    padding: 48px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
     transition: background 0.25s;
     position: relative;
     overflow: hidden;
@@ -363,10 +362,10 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.14em;
+    font-size: 12px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--dim);
   }
@@ -384,19 +383,18 @@
   }
 
   .service-card:hover .service-icon-svg {
-    transform: scale(1.18) rotate(-4deg);
+    transform: scale(1.15) rotate(-4deg);
     filter: drop-shadow(0 0 6px rgba(200, 255, 0, 0.4));
   }
 
   .service-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 26px;
-    line-height: 1.3; /* Исправлено: 1.15 -> 1.3 для буквы g в "Management" */
+    font-size: 24px;
+    line-height: 1.25;
     color: var(--white);
-    padding-bottom: 4px;
   }
-  .service-desc { font-size: 14px; color: var(--dim); line-height: 1.75; max-width: 380px; }
+  .service-desc { font-size: 14px; color: var(--dim); line-height: 1.7; max-width: 400px; }
 
   /* ─── VALUE / WHY US ─── */
   .value-section {
@@ -408,12 +406,11 @@
     align-items: center;
   }
   .value-headline {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(36px, 4vw, 58px);
-    line-height: 1.2; /* Исправлено: 1.05 -> 1.2 */
-    letter-spacing: -0.03em;
-    padding-bottom: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(36px, 4vw, 54px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
   .value-headline em { font-style: normal; color: var(--accent); }
 
@@ -425,11 +422,11 @@
     border: 1px solid rgba(200,255,0,0.2);
     color: var(--accent);
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 8px 16px;
-    border-radius: 2px;
+    border-radius: 4px;
     margin-bottom: 24px;
   }
   .value-pill::before {
@@ -447,9 +444,9 @@
   .value-points { display: flex; flex-direction: column; gap: 28px; }
   .value-point { display: flex; gap: 20px; align-items: flex-start; }
   .value-point-num {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--accent);
     letter-spacing: 0.08em;
     padding-top: 3px;
@@ -458,13 +455,13 @@
   }
   .value-point-text strong {
     display: block;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
     color: var(--white);
     margin-bottom: 4px;
   }
-  .value-point-text p { font-size: 13px; color: var(--dim); line-height: 1.7; }
+  .value-point-text p { font-size: 14px; color: var(--dim); line-height: 1.65; }
 
   /* ─── BRANDS ─── */
   .brands-section { padding: 72px 48px; border-bottom: 1px solid var(--border); }
@@ -472,17 +469,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
   .brands-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--white);
   }
-  .brands-count { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); }
+  .brands-count { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); }
 
   .brands-grid {
     display: grid;
@@ -492,49 +489,47 @@
   }
   .brand-cell {
     background: var(--black);
-    padding: 32px 24px;
+    padding: 28px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s;
-    height: 120px;
+    height: 110px;
   }
   .brand-cell:hover { background: var(--surface); }
 
   .brand-cell img {
     width: auto;
-    max-height: 64px;
+    max-height: 56px;
     max-width: 85%;
     object-fit: contain;
     filter: brightness(0.9);
     transition: filter 0.25s, transform 0.25s;
-    border-radius: 16px;
+    border-radius: 12px;
   }
   .brand-cell:hover img { filter: brightness(1.2); transform: scale(1.05); }
 
   .brand-cell img.brand-tecno {
-    max-height: 32px;
+    max-height: 28px;
   }
 
   /* ─── CAMPAIGN HIGHLIGHTS ─── */
   .highlights-section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
 
   .highlights-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(28px, 3.5vw, 48px);
-    line-height: 1.25;
-    letter-spacing: 0.08em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 3.2vw, 44px);
+    line-height: 1.2;
+    letter-spacing: 0.04em;
     text-align: center;
     margin-bottom: 12px;
-    padding: 6px 0;
-    overflow: visible;
   }
   .highlights-sub {
     text-align: center;
     color: #A1A1AA;
     font-size: 14px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     margin-bottom: 56px;
   }
 
@@ -547,7 +542,7 @@
   }
 
   .video-cell {
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     position: relative;
     background: var(--surface);
@@ -579,30 +574,29 @@
     pointer-events: none;
   }
   .cta-eyebrow {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     position: relative;
   }
   .cta-headline {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(40px, 6vw, 80px);
-    line-height: 1.1; /* Исправлено: 0.95 -> 1.1 */
-    letter-spacing: -0.03em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(38px, 5vw, 68px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     margin-bottom: 20px;
     position: relative;
-    padding-bottom: 6px;
   }
   .cta-sub {
     font-size: 16px;
     color: var(--dim);
     max-width: 480px;
     margin: 0 auto 48px;
-    line-height: 1.7;
+    line-height: 1.6;
     position: relative;
   }
   .cta-buttons {
@@ -620,12 +614,11 @@
     gap: 10px;
     background: var(--accent);
     color: var(--black);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 15px;
-    letter-spacing: 0.06em;
     padding: 18px 40px;
-    border-radius: 2px;
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.2s;
   }
@@ -636,13 +629,12 @@
     align-items: center;
     gap: 10px;
     color: var(--silver);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 14px;
-    letter-spacing: 0.06em;
     padding: 18px 32px;
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.2s;
   }
@@ -665,17 +657,16 @@
     gap: 24px;
     flex-wrap: wrap;
   }
-  .footer-logo img { height: 48px; width: auto; opacity: 0.7; }
+  .footer-logo img { height: 40px; width: auto; opacity: 0.8; }
   .footer-links { display: flex; gap: 28px; }
   .footer-links a {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--dim);
     text-decoration: none;
-    letter-spacing: 0.06em;
     transition: color 0.2s;
   }
   .footer-links a:hover { color: var(--white); }
-  .footer-copy { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .footer-copy { font-size: 13px; color: var(--dim); }
 
   /* ─── MOBILE & RESPONSIVE ─── */
   @media (max-width: 992px) {
@@ -683,13 +674,13 @@
       grid-template-columns: 1fr;
       gap: 48px;
     }
-    .hero { padding: 130px 24px 60px; }
+    .hero { padding: 120px 24px 60px; }
     .hero-stats-grid { width: 100%; }
   }
 
   @media (max-width: 768px) {
-    nav { padding: 8px 20px 4px; }
-    .nav-logo img { height: 56px; margin-top: 2px; }
+    nav { padding: 12px 20px; }
+    .nav-logo img { height: 40px; }
     .nav-menu { display: none; }
     .section { padding: 64px 20px; }
     .services-grid { grid-template-columns: 1fr; }
@@ -699,8 +690,8 @@
     .brands-grid { grid-template-columns: repeat(3, 1fr); }
     
     .brand-cell { height: 90px; padding: 16px 12px; }
-    .brand-cell img { max-height: 48px; }
-    .brand-cell img.brand-tecno { max-height: 24px; }
+    .brand-cell img { max-height: 44px; }
+    .brand-cell img.brand-tecno { max-height: 22px; }
 
     .highlights-section { padding: 64px 20px; }
     .videos-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -740,7 +731,6 @@
   <div class="hero-glow"></div>
   
   <div class="hero-container">
-    <!-- Левая колонка -->
     <div class="hero-left">
       <div class="hero-eyebrow">Influencer Marketing Group</div>
       <h1 class="hero-headline">
@@ -758,7 +748,6 @@
       </div>
     </div>
 
-    <!-- Правая колонка -->
     <div class="hero-stats-grid">
       <div class="hero-stat-card">
         <div class="hero-stat-number">10<span>M+</span></div>
@@ -807,7 +796,6 @@
   <div class="section-eyebrow">What We Do</div>
   <div class="services-grid">
     
-    <!-- Card 1: TikTok -->
     <div class="service-card">
       <div class="service-card-header">
         <div class="platform-badge"><div class="platform-dot"></div>TikTok</div>
@@ -817,7 +805,6 @@
       <p class="service-desc">We identify and connect your brand with carefully selected TikTok creators whose audience aligns with your campaign goals and product category.</p>
     </div>
 
-    <!-- Card 2: Instagram -->
     <div class="service-card">
       <div class="service-card-header">
         <div class="platform-badge"><div class="platform-dot"></div>Instagram</div>
@@ -827,7 +814,6 @@
       <p class="service-desc">We connect brands with high-performing Instagram creators to increase engagement, reach, and brand awareness through authentic storytelling.</p>
     </div>
 
-    <!-- Card 3: YouTube -->
     <div class="service-card">
       <div class="service-card-header">
         <div class="platform-badge"><div class="platform-dot"></div>YouTube</div>
@@ -837,7 +823,6 @@
       <p class="service-desc">We source and produce authentic, high-converting user-generated content designed to build trust with your audience and drive measurable sales.</p>
     </div>
 
-    <!-- Card 4: Full Service -->
     <div class="service-card">
       <div class="service-card-header">
         <div class="platform-badge"><div class="platform-dot"></div>Full Service</div>
