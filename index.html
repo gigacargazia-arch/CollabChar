@@ -6,7 +6,7 @@
 <title>GCK Agency — Influencer Marketing Group</title>
 <meta name="description" content="GCK Agency connects ambitious brands with top-tier influencers to drive authentic engagement, reach, and real sales growth.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -71,7 +71,7 @@
   }
   .nav-cta:hover { background: #deff33; }
 
-  /* ─── HERO ─── */
+  /* ─── HERO (REDESIGNED) ─── */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -408,19 +408,16 @@
 
   .value-points { display: flex; flex-direction: column; gap: 28px; }
   .value-point { display: flex; gap: 20px; align-items: flex-start; }
-  
-  /* ИСПРАВЛЕННЫЙ СТИЛЬ ДЛЯ ЦИФР С ПРЕКРАСНОЙ ЧИТАЕМОСТЬЮ */
   .value-point-num {
     font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 11px;
     color: var(--accent);
-    letter-spacing: 0.02em;
-    line-height: 1.2;
+    letter-spacing: 0.08em;
+    padding-top: 3px;
     flex-shrink: 0;
-    width: 32px;
+    width: 24px;
   }
-  
   .value-point-text strong {
     display: block;
     font-family: 'Syne', sans-serif;
@@ -473,7 +470,7 @@
     object-fit: contain;
     filter: brightness(0.9);
     transition: filter 0.25s, transform 0.25s;
-    border-radius: 16px;
+    border-radius: 16px; /* Округление иконок как у TopTop */
   }
   .brand-cell:hover img { filter: brightness(1.2); transform: scale(1.05); }
 
@@ -694,6 +691,7 @@
   <div class="hero-glow"></div>
   
   <div class="hero-container">
+    <!-- Левая колонка с оффером и кнопками -->
     <div class="hero-left">
       <div class="hero-eyebrow">Influencer Marketing Group</div>
       <h1 class="hero-headline">
@@ -711,6 +709,7 @@
       </div>
     </div>
 
+    <!-- Правая колонка с карточками статистики -->
     <div class="hero-stats-grid">
       <div class="hero-stat-card">
         <div class="hero-stat-number">10<span>M+</span></div>
