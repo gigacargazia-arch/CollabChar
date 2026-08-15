@@ -59,7 +59,6 @@
     text-decoration: none;
   }
 
-  /* УВЕЛИЧЕНО ЛОГО В ШАПКЕ */
   .nav-logo img {
     height: 85px;
     width: auto;
@@ -107,6 +106,41 @@
     transition: background 0.2s, transform 0.2s;
   }
   .nav-cta:hover { background: #deff33; transform: translateY(-1px); }
+
+  .nav-cta-mobile { display: none; }
+
+  /* HAMBURGER TOGGLE */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 105;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background-color: var(--white);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  /* TOGGLE ANIMATION (X ICON) */
+  .nav-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--accent);
+  }
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--accent);
+  }
 
   /* ─── HERO ─── */
   .hero {
@@ -662,7 +696,6 @@
     flex-wrap: wrap;
   }
   
-  /* УВЕЛИЧЕНО ЛОГО В ФУТЕРЕ */
   .footer-logo img { height: 75px; width: auto; opacity: 0.9; }
   
   .footer-links { display: flex; gap: 28px; }
@@ -688,7 +721,52 @@
   @media (max-width: 768px) {
     nav { padding: 12px 20px; }
     .nav-logo img { height: 60px; }
-    .nav-menu { display: none; }
+    
+    .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+
+    /* MOBILE SLIDE-OUT MENU */
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 320px;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid var(--border);
+      padding: 110px 32px 40px;
+      gap: 24px;
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      align-items: flex-start;
+      z-index: 100;
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-menu a {
+      font-size: 18px;
+      width: 100%;
+    }
+
+    .nav-cta-mobile {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: var(--black) !important;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 4px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
     .section { padding: 64px 20px; }
     .services-grid { grid-template-columns: 1fr; }
     .service-card { padding: 36px 24px; }
@@ -723,12 +801,23 @@
   <a href="#" class="nav-logo">
     <img src="assets/images/logo.svg" alt="GCK Agency">
   </a>
-  <div class="nav-menu">
+
+  <!-- Mobile Hamburger Button -->
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Navigation Links -->
+  <div class="nav-menu" id="navMenu">
     <a href="#services">Services</a>
     <a href="#why-us">Why Us</a>
     <a href="#brands">Brands</a>
     <a href="#highlights">Campaign Highlights</a>
+    <a href="#contact" class="nav-cta-mobile">Start for Free →</a>
   </div>
+
   <a href="#contact" class="nav-cta">Start for Free →</a>
 </nav>
 
@@ -976,984 +1065,24 @@
   <div class="footer-copy">© 2026 GCK Agency. All rights reserved.</div>
 </footer>
 
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GCK Agency — Influencer Marketing Group</title>
-<meta name="description" content="GCK Agency connects ambitious brands with top-tier influencers to drive authentic engagement, reach, and real sales growth.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --black:   #0A0A0A;
-    --surface: #111111;
-    --border:  #1E1E1E;
-    --muted:   #2A2A2A;
-    --dim:     #666666;
-    --silver:  #999999;
-    --white:   #F0EFED;
-    --accent:  #C8FF00;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  /* ─── SCROLL MARGIN FOR FIXED NAV OFFSET ─── */
-  section, div[id] {
-    scroll-margin-top: 100px;
-  }
-
-  /* ─── NAV ─── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 48px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    background: rgba(10,10,10,0.92);
-    backdrop-filter: blur(16px);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-
-  /* УВЕЛИЧЕНО ЛОГО В ШАПКЕ */
-  .nav-logo img {
-    height: 85px;
-    width: auto;
-    display: block;
-    object-fit: contain;
-    transition: transform 0.2s ease;
-  }
-
-  .nav-logo img:hover {
-    transform: scale(1.02);
-  }
-
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-
-  .nav-menu a {
-    color: var(--silver);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-menu a:hover {
-    color: var(--white);
-  }
-
-  .nav-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: var(--black);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    padding: 10px 22px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .nav-cta:hover { background: #deff33; transform: translateY(-1px); }
-
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    padding: 140px 48px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(200,255,0,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,255,0,0.03) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
-  }
-
-  .hero-glow {
-    position: absolute;
-    top: 50%;
-    right: 15%;
-    transform: translateY(-50%);
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(200,255,0,0.08) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .hero-container {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 60px;
-    align-items: center;
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .hero-eyebrow {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 28px; height: 1px;
-    background: var(--accent);
-  }
-
-  .hero-headline {
-    font-family: 'Syne', 'Space Grotesk', sans-serif;
-    font-weight: 800;
-    font-size: clamp(38px, 4.8vw, 70px);
-    line-height: 0.98;
-    letter-spacing: -0.03em;
-    color: var(--white);
-    margin-bottom: 28px;
-  }
-  .hero-headline em { 
-    font-style: normal; 
-    color: var(--accent); 
-  }
-
-  .hero-descriptor {
-    font-size: 16px;
-    color: var(--silver);
-    max-width: 480px;
-    line-height: 1.6;
-    margin-bottom: 36px;
-  }
-
-  .hero-actions { 
-    display: flex; 
-    align-items: center; 
-    gap: 20px; 
-    flex-wrap: wrap; 
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent);
-    color: var(--black);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.02em;
-    padding: 16px 32px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .btn-primary:hover { background: #deff33; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(200,255,0,0.15); }
-
-  .btn-ghost {
-    color: var(--silver);
-    font-size: 14px;
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 2px;
-    transition: color 0.2s;
-  }
-  .btn-ghost:hover { color: var(--white); border-color: var(--white); }
-
-  .hero-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    width: 100%;
-  }
-
-  .hero-stat-card {
-    background: rgba(17, 17, 17, 0.7);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 28px 24px;
-    backdrop-filter: blur(12px);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .hero-stat-card:hover {
-    border-color: rgba(200, 255, 0, 0.4);
-    transform: translateY(-3px);
-    background: rgba(200, 255, 0, 0.02);
-  }
-
-  .hero-stat-number {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 1;
-    color: var(--white);
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-  .hero-stat-number span { color: var(--accent); }
-
-  .hero-stat-label {
-    font-size: 11px;
-    color: var(--dim);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  /* ─── TICKER ─── */
-  .ticker-wrap {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-    padding: 14px 0;
-    background: var(--surface);
-    position: relative;
-    z-index: 2;
-  }
-  .ticker-track {
-    display: flex;
-    gap: 60px;
-    width: max-content;
-    animation: ticker 28s linear infinite;
-  }
-  .ticker-track:hover { animation-play-state: paused; }
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .ticker-item {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--dim);
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 60px;
-  }
-  .ticker-item::after { content: '✦'; color: var(--accent); font-size: 9px; }
-
-  /* ─── SERVICES ─── */
-  .section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
-
-  .section-eyebrow {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-  }
-
-  .service-card {
-    background: var(--black);
-    padding: 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    transition: background 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 0;
-    background: var(--accent);
-    transition: height 0.3s ease;
-  }
-  .service-card:hover { background: var(--surface); }
-  .service-card:hover::before { height: 100%; }
-
-  .service-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .platform-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--dim);
-  }
-  .platform-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  .service-icon-svg {
-    width: 24px;
-    height: 24px;
-    fill: var(--accent);
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-
-  .service-card:hover .service-icon-svg {
-    transform: scale(1.15) rotate(-4deg);
-    filter: drop-shadow(0 0 6px rgba(200, 255, 0, 0.4));
-  }
-
-  .service-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.25;
-    color: var(--white);
-  }
-  .service-desc { font-size: 14px; color: var(--dim); line-height: 1.7; max-width: 400px; }
-
-  /* ─── VALUE / WHY US ─── */
-  .value-section {
-    padding: 96px 48px;
-    border-bottom: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  .value-headline {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: clamp(36px, 4vw, 54px);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-  .value-headline em { font-style: normal; color: var(--accent); }
-
-  .value-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(200,255,0,0.08);
-    border: 1px solid rgba(200,255,0,0.2);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 8px 16px;
-    border-radius: 4px;
-    margin-bottom: 24px;
-  }
-  .value-pill::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%         { opacity: 0.4; transform: scale(0.7); }
-  }
-
-  .value-points { display: flex; flex-direction: column; gap: 28px; }
-  .value-point { display: flex; gap: 20px; align-items: flex-start; }
-  .value-point-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    padding-top: 3px;
-    flex-shrink: 0;
-    width: 24px;
-  }
-  .value-point-text strong {
-    display: block;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .value-point-text p { font-size: 14px; color: var(--dim); line-height: 1.65; }
-
-  /* ─── BRANDS ─── */
-  .brands-section { padding: 72px 48px; border-bottom: 1px solid var(--border); }
-  .brands-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 40px;
-  }
-  .brands-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--white);
-  }
-  .brands-count { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); }
-
-  .brands-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1px;
-    background: var(--border);
-  }
-  .brand-cell {
-    background: var(--black);
-    padding: 28px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    height: 110px;
-  }
-  .brand-cell:hover { background: var(--surface); }
-
-  .brand-cell img {
-    width: auto;
-    max-height: 56px;
-    max-width: 85%;
-    object-fit: contain;
-    filter: brightness(0.9);
-    transition: filter 0.25s, transform 0.25s;
-    border-radius: 12px;
-  }
-  .brand-cell:hover img { filter: brightness(1.2); transform: scale(1.05); }
-
-  .brand-cell img.brand-tecno {
-    max-height: 28px;
-  }
-
-  /* ─── CAMPAIGN HIGHLIGHTS ─── */
-  .highlights-section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
-
-  .highlights-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: clamp(26px, 3.2vw, 44px);
-    line-height: 1.2;
-    letter-spacing: 0.04em;
-    text-align: center;
-    margin-bottom: 12px;
-  }
-  .highlights-sub {
-    text-align: center;
-    color: #A1A1AA;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    margin-bottom: 56px;
-  }
-
-  .videos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .video-cell {
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    background: var(--surface);
-    aspect-ratio: 9/16;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-  .video-cell video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-  .video-cell:hover video { transform: scale(1.04); }
-
-  /* ─── CTA ─── */
-  .cta-section {
-    padding: 120px 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-glow {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px; height: 300px;
-    background: radial-gradient(ellipse, rgba(200,255,0,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cta-eyebrow {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-    position: relative;
-  }
-  .cta-headline {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: clamp(38px, 5vw, 68px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  .cta-sub {
-    font-size: 16px;
-    color: var(--dim);
-    max-width: 480px;
-    margin: 0 auto 48px;
-    line-height: 1.6;
-    position: relative;
-  }
-  .cta-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    position: relative;
-  }
-
-  .btn-accent-lg {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent);
-    color: var(--black);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 18px 40px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .btn-accent-lg:hover { background: #deff33; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,255,0,0.2); }
-
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--silver);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 18px 32px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--dim); color: var(--white); }
-
-  .btn-icon-svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-    flex-shrink: 0;
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    padding: 40px 48px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  
-  /* УВЕЛИЧЕНО ЛОГО В ФУТЕРЕ */
-  .footer-logo img { height: 75px; width: auto; opacity: 0.9; }
-  
-  .footer-links { display: flex; gap: 28px; }
-  .footer-links a {
-    font-size: 13px;
-    color: var(--dim);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--white); }
-  .footer-copy { font-size: 13px; color: var(--dim); }
-
-  /* ─── MOBILE & RESPONSIVE ─── */
-  @media (max-width: 992px) {
-    .hero-container {
-      grid-template-columns: 1fr;
-      gap: 48px;
-    }
-    .hero { padding: 120px 24px 60px; }
-    .hero-stats-grid { width: 100%; }
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 12px 20px; }
-    .nav-logo img { height: 60px; }
-    .nav-menu { display: none; }
-    .section { padding: 64px 20px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .service-card { padding: 36px 24px; }
-    .value-section { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px; }
-    .brands-section { padding: 56px 20px; }
-    .brands-grid { grid-template-columns: repeat(3, 1fr); }
-    
-    .brand-cell { height: 90px; padding: 16px 12px; }
-    .brand-cell img { max-height: 44px; }
-    .brand-cell img.brand-tecno { max-height: 22px; }
-
-    .highlights-section { padding: 64px 20px; }
-    .videos-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .cta-section { padding: 80px 20px; }
-    footer { padding: 32px 20px; flex-direction: column; gap: 20px; }
-    .footer-links { flex-wrap: wrap; gap: 16px; }
-  }
-
-  @media (max-width: 480px) {
-    .hero-stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .hero-stat-card { padding: 20px 16px; }
-    .hero-stat-number { font-size: 32px; }
-    .videos-grid { grid-template-columns: repeat(2, 1fr); }
-    .brands-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <img src="assets/images/logo.svg" alt="GCK Agency">
-  </a>
-  <div class="nav-menu">
-    <a href="#services">Services</a>
-    <a href="#why-us">Why Us</a>
-    <a href="#brands">Brands</a>
-    <a href="#highlights">Campaign Highlights</a>
-  </div>
-  <a href="#contact" class="nav-cta">Start for Free →</a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
-  
-  <div class="hero-container">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Influencer Marketing Group</div>
-      <h1 class="hero-headline">
-        We find<br>
-        influencers<br>
-        <em>that<br>convert.</em>
-      </h1>
-      <p class="hero-descriptor">
-        We handle everything — discovery, outreach, negotiation, and reporting.
-        You pay only for the creator integration. Zero agency fees.
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Start for Free →</a>
-        <a href="#services" class="btn-ghost">See how it works</a>
-      </div>
-    </div>
-
-    <div class="hero-stats-grid">
-      <div class="hero-stat-card">
-        <div class="hero-stat-number">10<span>M+</span></div>
-        <div class="hero-stat-label">Campaign Views</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number">50<span>+</span></div>
-        <div class="hero-stat-label">Brand Partners</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number">500<span>+</span></div>
-        <div class="hero-stat-label">Influencers</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number">24<span>/7</span></div>
-        <div class="hero-stat-label">Support</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <div class="ticker-item">TikTok Discovery</div>
-    <div class="ticker-item">Instagram Creators</div>
-    <div class="ticker-item">YouTube Campaigns</div>
-    <div class="ticker-item">UGC Production</div>
-    <div class="ticker-item">Full Management</div>
-    <div class="ticker-item">Zero Agency Fees</div>
-    <div class="ticker-item">500+ Influencers</div>
-    <div class="ticker-item">10M+ Campaign Views</div>
-    <div class="ticker-item">TikTok Discovery</div>
-    <div class="ticker-item">Instagram Creators</div>
-    <div class="ticker-item">YouTube Campaigns</div>
-    <div class="ticker-item">UGC Production</div>
-    <div class="ticker-item">Full Management</div>
-    <div class="ticker-item">Zero Agency Fees</div>
-    <div class="ticker-item">500+ Influencers</div>
-    <div class="ticker-item">10M+ Campaign Views</div>
-  </div>
-</div>
-
-<!-- SERVICES -->
-<section class="section" id="services">
-  <div class="section-eyebrow">What We Do</div>
-  <div class="services-grid">
-    
-    <div class="service-card">
-      <div class="service-card-header">
-        <div class="platform-badge"><div class="platform-dot"></div>TikTok</div>
-        <svg class="service-icon-svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.83V7.63a6.34 6.34 0 0 0-5.32 6.24 6.34 6.34 0 0 0 10.74 4.54 6.27 6.27 0 0 0 1.93-4.52V9a8.16 8.16 0 0 0 4.76 1.52V7.07a4.84 4.84 0 0 1-2-.38z"/></svg>
-      </div>
-      <div class="service-title">TikTok Influencer Discovery</div>
-      <p class="service-desc">We identify and connect your brand with carefully selected TikTok creators whose audience aligns with your campaign goals and product category.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-card-header">
-        <div class="platform-badge"><div class="platform-dot"></div>Instagram</div>
-        <svg class="service-icon-svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </div>
-      <div class="service-title">Instagram Creator Matching</div>
-      <p class="service-desc">We connect brands with high-performing Instagram creators to increase engagement, reach, and brand awareness through authentic storytelling.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-card-header">
-        <div class="platform-badge"><div class="platform-dot"></div>YouTube</div>
-        <svg class="service-icon-svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      </div>
-      <div class="service-title">Content & UGC Production</div>
-      <p class="service-desc">We source and produce authentic, high-converting user-generated content designed to build trust with your audience and drive measurable sales.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-card-header">
-        <div class="platform-badge"><div class="platform-dot"></div>Full Service</div>
-        <svg class="service-icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L1 7l11 5 11-5-11-5zM1 12l11 5 11-5M1 17l11 5 11-5"/></svg>
-      </div>
-      <div class="service-title">Full Campaign Management</div>
-      <p class="service-desc">From influencer selection to campaign reporting, we manage the entire process — outreach, contracts, content approval, and performance analytics.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- VALUE PROP / WHY US -->
-<section class="value-section" id="why-us">
-  <div>
-    <div class="value-pill">Why GCK</div>
-    <h2 class="value-headline">
-      We work for<br>
-      <em>results,</em><br>
-      not retainers.
-    </h2>
-  </div>
-  <div class="value-points">
-    <div class="value-point">
-      <div class="value-point-num">01</div>
-      <div class="value-point-text">
-        <strong>Zero Agency Fees</strong>
-        <p>We don't charge brands for outreach or management. Your budget goes directly toward creator integrations — nothing else.</p>
-      </div>
-    </div>
-    <div class="value-point">
-      <div class="value-point-num">02</div>
-      <div class="value-point-text">
-        <strong>Pre-Vetted Creator Network</strong>
-        <p>500+ influencers across TikTok, Instagram, and YouTube — already screened for engagement quality and audience authenticity.</p>
-      </div>
-    </div>
-    <div class="value-point">
-      <div class="value-point-num">03</div>
-      <div class="value-point-text">
-        <strong>End-to-End Execution</strong>
-        <p>We handle discovery, outreach, negotiation, briefing, and post-campaign reporting. You approve the content. We handle everything else.</p>
-      </div>
-    </div>
-    <div class="value-point">
-      <div class="value-point-num">04</div>
-      <div class="value-point-text">
-        <strong>24/7 Support</strong>
-        <p>Live campaigns don't sleep. Your dedicated manager is available around the clock during active campaigns.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BRANDS -->
-<section class="brands-section" id="brands">
-  <div class="brands-header">
-    <div class="brands-title">Brands We've Amplified</div>
-    <div class="brands-count">50+ Partners</div>
-  </div>
-  <div class="brands-grid">
-    <div class="brand-cell"><img src="assets/images/brand-toptop.png" alt="TopTop"></div>
-    <div class="brand-cell"><img src="assets/images/brand-liene.jpg" alt="Liene"></div>
-    <div class="brand-cell"><img src="assets/images/brand-oppo.png" alt="OPPO"></div>
-    <div class="brand-cell"><img src="assets/images/brand-soyo.jpg" alt="Soyo"></div>
-    <div class="brand-cell"><img src="assets/images/brand-gac.jpg" alt="GAC"></div>
-    <div class="brand-cell"><img src="assets/images/brand-tecno.png" alt="TECNO" class="brand-tecno"></div>
-    <div class="brand-cell"><img src="assets/images/brand-miniso.jpg" alt="Miniso"></div>
-    <div class="brand-cell"><img src="assets/images/brand-loccitane.png" alt="L'Occitane"></div>
-    <div class="brand-cell"><img src="assets/images/brand-eufy.jpg" alt="Eufy"></div>
-    <div class="brand-cell"><img src="assets/images/brand-chat.jpg" alt="Chat App"></div>
-  </div>
-</section>
-
-<!-- CAMPAIGN HIGHLIGHTS -->
-<section class="highlights-section" id="highlights">
-  <div class="highlights-title">CAMPAIGN HIGHLIGHTS</div>
-  <div class="highlights-sub">«Real UGC & creator content driving engagement for our partners»</div>
-  <div class="videos-grid">
-    <div class="video-cell">
-      <video autoplay loop muted playsinline preload="metadata">
-        <source src="assets/video/video1.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="video-cell">
-      <video autoplay loop muted playsinline preload="metadata">
-        <source src="assets/video/video2.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="video-cell">
-      <video autoplay loop muted playsinline preload="metadata">
-        <source src="assets/video/video3.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="video-cell">
-      <video autoplay loop muted playsinline preload="metadata">
-        <source src="assets/video/video4.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="video-cell">
-      <video autoplay loop muted playsinline preload="metadata">
-        <source src="assets/video/video5.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="video-cell">
-      <video autoplay loop muted playsinline preload="metadata">
-        <source src="assets/video/video6.mp4" type="video/mp4">
-      </video>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="cta-glow"></div>
-  <div class="cta-eyebrow">Get Started Today</div>
-  <h2 class="cta-headline">Ready to find<br>your creators?</h2>
-  <p class="cta-sub">Tell us about your brand and campaign goals. We'll match you with the most relevant creators for your budget and niche.</p>
-  <div class="cta-buttons">
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=khatia.brand.marketing.manager@gmail.com" target="_blank" class="btn-accent-lg">
-      <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      Email Us
-    </a>
-    <a href="https://api.whatsapp.com/send?phone=995599281709" target="_blank" class="btn-outline">
-      <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.763.459 3.48 1.332 5.001l-1.416 5.172 5.292-1.388c1.464.798 3.115 1.218 4.777 1.219h.005c5.507 0 9.991-4.479 9.992-9.986.001-2.666-1.033-5.173-2.914-7.058-1.881-1.885-4.385-2.923-7.058-2.923zm5.82 13.911c-.244.688-1.425 1.353-1.968 1.419-.508.061-1.171.092-3.376-.807-2.822-1.15-4.639-4.02-4.78-4.208-.141-.188-1.139-1.514-1.139-2.888 0-1.373.719-2.049.977-2.33.258-.282.563-.353.751-.353.188 0 .376.002.54.01.174.008.409-.066.639.485.235.563.8 1.95.87 2.09.07.141.117.306.023.494-.094.188-.141.306-.282.47-.141.164-.296.367-.423.493-.141.141-.288.295-.124.577.164.282.729 1.185 1.564 1.928 1.074.956 1.98 1.252 2.262 1.393.282.141.446.117.61-.07.164-.188.705-.822.893-1.104.188-.282.376-.235.634-.141.258.094 1.644.775 1.926.916.282.141.47.211.54.329.07.117.07.681-.174 1.369z"/></svg>
-      WhatsApp
-    </a>
-    <a href="https://www.instagram.com/khatia.chargazia/" target="_blank" class="btn-outline">
-      <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      Instagram
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo"><img src="assets/images/logo.svg" alt="GCK Agency"></div>
-  <div class="footer-links">
-    <a href="#services">Services</a>
-    <a href="#why-us">Why Us</a>
-    <a href="#brands">Brands</a>
-    <a href="#highlights">Campaign Highlights</a>
-  </div>
-  <div class="footer-copy">© 2026 GCK Agency. All rights reserved.</div>
-</footer>
+<!-- JAVASCRIPT FOR MOBILE MENU -->
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navLinks = navMenu.querySelectorAll('a');
+
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+    });
+  });
+</script>
 
 </body>
 </html>
