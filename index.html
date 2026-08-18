@@ -9,10 +9,11 @@
 <meta name="description" content="GCK Agency connects ambitious brands with top-tier influencers to drive authentic engagement, reach, and real sales growth.">
 
 <!-- ФАВИКОНЫ -->
+<link rel="icon" href="assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/images/favicon_512x512.png">
-<link rel="icon" type="image/png" sizes="150x150" href="assets/images/favicon_only.png">
 <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-<link rel="shortcut icon" href="assets/images/favicon_512x512.png">
+<link rel="shortcut icon" href="assets/images/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon_512x512.png">
 
 <!-- OPEN GRAPH (ДЛЯ СОЦСЕТЕЙ И СНИППЕТОВ) -->
@@ -830,6 +831,19 @@
     .hero-stat-number { font-size: 32px; }
     .videos-grid { grid-template-columns: repeat(2, 1fr); }
     .brands-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .ticker-item {
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      gap: 28px;
+    }
+    .ticker-track {
+      gap: 28px;
+      animation-duration: 18s;
+    }
+    .ticker-item::after { font-size: 7px; }
   }
 </style>
 </head>
