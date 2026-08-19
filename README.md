@@ -2,7 +2,7 @@
 
 Professional influencer marketing and UGC agency connecting global brands with top creators.
 
-🌐 **Official Website:** [gcgroupagency.com](https://gcgroupagency.com/)
+🌐 **Official Website:** [collabchar.com](http://collabchar.com/)
 
 ## 🚀 Our Services
 * TikTok & Instagram Influencer Campaigns
