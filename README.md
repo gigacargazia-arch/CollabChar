@@ -1,4 +1,4 @@
-# GCK Agency – Influencer Marketing Agency
+# collabchar – Influencer Marketing Agency
 
 Professional influencer marketing and UGC agency connecting global brands with top creators.
 
