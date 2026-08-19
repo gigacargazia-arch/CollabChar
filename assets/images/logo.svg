@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
-  <!-- Вспышка сверху -->
-  <path d="M250 100 Q250 160 190 160 Q250 160 250 220 Q250 160 310 160 Q250 160 250 100 Z" fill="#C8FF00"/>
-  
-  <!-- Крупный текст GCK -->
-  <text x="250" y="340" font-family="'Syne', 'Inter', sans-serif" font-weight="800" font-size="96" fill="#F0EFED" text-anchor="middle" letter-spacing="4">GC<tspan fill="#C8FF00">K</tspan></text>
-</svg>
